@@ -1,4 +1,4 @@
-
+"use client"
 import {
   Button,
   FieldError,
@@ -12,6 +12,24 @@ import {
 } from "@heroui/react";
 
 const AddDestinationPage = () => {
+  const onSubmit = async(e)=>{
+    e.preventDefault() 
+    const formData = new FormData(e.currentTarget)
+    const destination = Object.fromEntries(formData.entries())
+ 
+
+ const res = await fetch("http://localhost:8000/destinations", {
+  method: "POST",
+  headers: {
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify(destination)
+})
+    const data = await res.json();
+    console.log(data);
+
+
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-blue-50 py-10 px-4">
       <div className="max-w-5xl mx-auto">
@@ -27,7 +45,7 @@ const AddDestinationPage = () => {
           </div>
 
           {/* Form */}
-          <Form className="p-10 space-y-8">
+          <Form onSubmit={onSubmit} className="p-10 space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Destination Name */}
               <div className="md:col-span-2">
