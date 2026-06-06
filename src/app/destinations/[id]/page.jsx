@@ -1,4 +1,8 @@
+
+
+import { EditModal } from "@/Components/EditModal";
 import Image from "next/image";
+
 import {
     FaMapMarkerAlt,
     FaTag,
@@ -21,7 +25,7 @@ console.log("Status:", res.status);
 
 const destination = await res.json();
 
-console.log("Destination:", destination);
+
 
 if (!destination) {
   return (
@@ -33,12 +37,17 @@ if (!destination) {
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
+            
+
+               <EditModal destination={destination}/>   
+
+                
             {/* Hero Section */}
             <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-xl">
                 <Image
-                    src={imageUrl}
+                    src={destination.imageUrl}
                     alt={
-destinationName}
+destination.destinationName}
                     fill
                     className="object-cover"
                 />
@@ -46,12 +55,12 @@ destinationName}
                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-8">
                     <h1 className="text-4xl md:text-5xl font-bold text-white">
                         {
-destinationName}
+destination.destinationName}
                     </h1>
 
                     <div className="flex items-center gap-2 text-white mt-3">
                         <FaMapMarkerAlt />
-                        <span>{country}</span>
+                        <span>{destination.country}</span>
                     </div>
                 </div>
             </div>
@@ -69,7 +78,7 @@ destinationName}
                             <FaTag className="text-blue-500 text-xl" />
                             <div>
                                 <p className="text-gray-500">Category</p>
-                                <p className="font-semibold">{category}</p>
+                                <p className="font-semibold">{destination.category}</p>
                             </div>
                         </div>
 
@@ -77,7 +86,7 @@ destinationName}
                             <FaClock className="text-green-500 text-xl" />
                             <div>
                                 <p className="text-gray-500">Duration</p>
-                                <p className="font-semibold">{duration}</p>
+                                <p className="font-semibold">{destination.duration}</p>
                             </div>
                         </div>
 
@@ -85,7 +94,7 @@ destinationName}
                             <FaMapMarkerAlt className="text-red-500 text-xl" />
                             <div>
                                 <p className="text-gray-500">Country</p>
-                                <p className="font-semibold">{country}</p>
+                                <p className="font-semibold">{destination.country}</p>
                             </div>
                         </div>
                     </div>
@@ -96,8 +105,8 @@ destinationName}
                         </h3>
 
                         <p className="text-gray-600 leading-relaxed">
-                            Experience the beauty of {destinationName} in{" "}
-                            {country}. This {category.toLowerCase()} package
+                            Experience the beauty of {destination.destinationName} in{" "}
+                            {destination.country}. This {destination.category.toLowerCase()} package
                             offers an unforgettable journey with amazing
                             attractions, local culture, and memorable
                             experiences. Perfect for travelers looking for a
@@ -112,7 +121,7 @@ destinationName}
                         <FaPlane className="mx-auto text-4xl text-blue-500 mb-4" />
 
                         <h3 className="text-3xl font-bold text-blue-600">
-                            ${price}
+                            ${destination.price}
                         </h3>
 
                         <p className="text-gray-500 mt-1">
